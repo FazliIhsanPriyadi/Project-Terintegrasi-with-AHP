@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Edit Mahasiswa{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Edit Mahasiswa</h2>
+    <form method="POST" action="{{ url_for('ubah_mahasiswa', npm=mahasiswa.npm) }}">
+        <div class="mb-3">
+            <label for="npm" class="form-label">NPM</label>
+            <input type="text" id="npm" name="npm" class="form-control" value="{{ mahasiswa.npm }}" required readonly>
+        </div>
+        <div class="mb-3">
+            <label for="nama" class="form-label">Nama</label>
+            <input type="text" id="nama" name="nama" class="form-control" value="{{ mahasiswa.nama }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="semester" class="form-label">Semester</label>
+            <input type="number" id="semester" name="semester" class="form-control" value="{{ mahasiswa.semester }}" required min="1" max="14">
+        </div>
+        <div class="mb-3">
+            <label for="angkatan" class="form-label">Angkatan</label>
+            <input type="number" id="angkatan" name="angkatan" class="form-control" value="{{ mahasiswa.angkatan }}" required min="2000" max="2099">
+        </div>
+        <div class="mb-3">
+            <label for="ipk" class="form-label">IPK</label>
+            <input type="number" step="0.01" id="ipk" name="ipk" class="form-control" value="{{ mahasiswa.ipk }}" required min="0" max="4">
+        </div>
+        <div class="mb-3">
+            <label for="nilai" class="form-label">Nilai</label>
+            <input type="number" id="nilai" name="nilai" class="form-control" value="{{ mahasiswa.nilai }}" required min="0" max="100">
+        </div>
+        <div class="mb-3">
+            <label for="matkul" class="form-label">Mata Kuliah</label>
+            <input type="text" id="matkul" name="matkul" class="form-control" value="{{ mahasiswa.matkul }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="kehadiran" class="form-label">Kehadiran (%)</label>
+            <input type="number" id="kehadiran" name="kehadiran" class="form-control" value="{{ mahasiswa.kehadiran }}" required min="0" max="100">
+        </div>
+        <div class="mb-3">
+            <label for="prestasi" class="form-label">Prestasi</label>
+            <input type="number" id="prestasi" name="prestasi" class="form-control" value="{{ mahasiswa.prestasi }}" required min="0">
+        </div>
+        <div class="mb-3">
+            <label for="organisasi" class="form-label">Organisasi</label>
+            <input type="number" id="organisasi" name="organisasi" class="form-control" value="{{ mahasiswa.organisasi }}" required min="0">
+        </div>
+        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+CREATE DATABASE IF NOT EXISTS mahasiswa;
+USE mahasiswa;
+
+DROP TABLE IF EXISTS mahasiswa;
+CREATE TABLE mahasiswa (
+    npm VARCHAR(20) PRIMARY KEY,
+    nama VARCHAR(100),
+    semester INT,
+    angkatan INT,
+    ipk DECIMAL(4,2),
+    nilai INT,
+    matkul VARCHAR(100),
+    kehadiran INT,
+    prestasi INT,
+    organisasi INT
+);
+
+INSERT INTO mahasiswa VALUES 
+('184230001', 'Clara', 2, 2024, 3.5, 75, 'Matematika Diskrit', 80, 2, 1),
+('184230002', 'Andi', 4, 2023, 3.2, 95, 'Pemrograman 2', 90, 1, 3),
+('184230003', 'Dina', 6, 2022, 3.4, 85, 'Analisis Data Statistik', 85, 0, 1),
+('184230004', 'Budi', 4, 2022, 3.3, 70, 'Kalkulus', 100, 3, 1),
+('184230005', 'Putra', 2, 2024, 3.6, 80, 'Teori Optimasi', 75, 1, 2),
+('184230006', 'Fitri', 4, 2023, 3.9, 90, 'Big Data', 80, 2, 3),
+('184230007', 'Aisyah', 6, 2022, 3.8, 85, 'Basis Data', 85, 1, 3),
+('184230008', 'Andre', 6, 2023, 3.4, 95, 'Logika Algoritma 2', 95, 1, 0),
+('184230009', 'Bella', 4, 2023, 3.5, 85, 'Visualisasi Data', 100, 0, 1),
+('184230010', 'Ghani', 6, 2022, 3.2, 80, 'Statistika Sains Data', 80, 3, 0);

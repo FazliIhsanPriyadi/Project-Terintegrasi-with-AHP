@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}Hasil Perhitungan AHP{% endblock %}
+
+{% block header %}
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Hasil Perhitungan AHP</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="container mt-3">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Bobot Kriteria</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                {% for kriteria, bobot in bobot_kriteria.items() %}
+                <div class="col-md-2">
+                    <div class="card text-white bg-info mb-3">
+                        <div class="card-body text-center">
+                            <h6 class="card-title">{{ kriteria|upper }}</h6>
+                            <p class="card-text">{{ "%.0f"|format(bobot*100) }}%</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header bg-success text-white">
+            <h5 class="mb-0">Peringkat Mahasiswa</h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Peringkat</th>
+                        <th>NPM</th>
+                        <th>Nama</th>
+                        <th>IPK</th>
+                        <th>Nilai</th>
+                        <th>Kehadiran</th>
+                        <th>Skor AHP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for mhs in mahasiswa %}
+                    <tr>
+                        <td>
+                            {% if mhs.peringkat == 1 %}
+                                <span class="badge badge-warning">1</span>
+                            {% elif mhs.peringkat == 2 %}
+                                <span class="badge badge-secondary">2</span>
+                            {% elif mhs.peringkat == 3 %}
+                                <span class="badge badge-danger">3</span>
+                            {% else %}
+                                <span class="badge badge-light">{{ mhs.peringkat }}</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ mhs.npm }}</td>
+                        <td>{{ mhs.nama }}</td>
+                        <td>{{ "%.2f"|format(mhs.ipk) }}</td>
+                        <td>{{ mhs.nilai }}</td>
+                        <td>{{ mhs.kehadiran }}%</td>
+                        <td>{{ "%.4f"|format(mhs.skor_akhir) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('mahasiswa') }}" class="btn btn-primary">Kembali ke Daftar Mahasiswa</a>
+    </div>
+</div>
+
+<style>
+    .badge {
+        font-size: 1rem;
+        padding: 0.5em 0.8em;
+    }
+    .badge-warning {
+        background-color: #ffc107;
+        color: #212529;
+    }
+    .badge-secondary {
+        background-color: #6c757d;
+    }
+    .badge-danger {
+        background-color: #dc3545;
+    }
+    .badge-light {
+        background-color: #f8f9fa;
+        color: #212529;
+    }
+</style>
+{% endblock %}

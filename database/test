@@ -1,0 +1,53 @@
+-- Buat database
+CREATE DATABASE IF NOT EXISTS siak_mahasiswa;
+USE siak_mahasiswa;
+
+-- Tabel Mahasiswa
+DROP TABLE IF EXISTS mahasiswa;
+CREATE TABLE mahasiswa (
+  nim VARCHAR(20) PRIMARY KEY,
+  nama VARCHAR(100),
+  jurusan VARCHAR(50),
+  angkatan INT,
+  password VARCHAR(100)
+);
+
+-- Tabel Nilai
+DROP TABLE IF EXISTS nilai;
+CREATE TABLE nilai (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nim VARCHAR(20),
+  mata_kuliah VARCHAR(100),
+  semester INT,
+  nilai VARCHAR(5),
+  FOREIGN KEY (nim) REFERENCES mahasiswa(nim) ON DELETE CASCADE
+);
+
+-- Isi data mahasiswa
+INSERT INTO mahasiswa (nim, nama, jurusan, angkatan, password) VALUES
+('2021010001', 'Andi Pratama', 'Teknik Informatika', 2021, '1234'),
+('2021010002', 'Siti Nurhaliza', 'Sistem Informasi', 2021, 'abcd'),
+('0123456789', 'Admin', 'Sistem Informasi', 2021, '3456'),
+('2020010003', 'Rudi Hartono', 'Teknik Komputer', 2020, 'pass123');
+
+-- Isi data nilai untuk masing-masing mahasiswa
+INSERT INTO nilai (nim, mata_kuliah, semester, nilai) VALUES
+-- Nilai untuk Andi Pratama
+('2021010001', 'Pemrograman Dasar', 1, 'A'),
+('2021010001', 'Matematika Diskrit', 1, 'A-'),
+('2021010001', 'Struktur Data', 2, 'B+'),
+
+-- Nilai untuk Siti Nurhaliza
+('2021010002', 'Pengantar Sistem Informasi', 1, 'B'),
+('2021010002', 'Database Dasar', 2, 'A'),
+('2021010002', 'Analisis Sistem', 2, 'A-'),
+
+-- Nilai untuk Admin
+('0123456789', 'Pengantar Sistem Informasi', 0, '-'),
+('0123456789', 'Database Dasar', 0, '-'),
+('0123456789', 'Analisis Sistem', 0, '-'),
+
+-- Nilai untuk Rudi Hartono
+('2020010003', 'Elektronika Digital', 1, 'B+'),
+('2020010003', 'Jaringan Komputer', 2, 'A'),
+('2020010003', 'Sistem Operasi', 2, 'B');

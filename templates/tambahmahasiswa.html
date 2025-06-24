@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Tambah Mahasiswa{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Tambah Mahasiswa</h1>
+
+    <form action="{{ url_for('tambah_mahasiswa') }}" method="POST">
+        <div class="mb-3">
+            <label for="npm" class="form-label">NPM</label>
+            <input type="text" class="form-control" id="npm" name="npm" required>
+        </div>
+        <div class="mb-3">
+            <label for="nama" class="form-label">Nama</label>
+            <input type="text" class="form-control" id="nama" name="nama" required>
+        </div>
+        <div class="mb-3">
+            <label for="semester" class="form-label">Semester</label>
+            <input type="number" class="form-control" id="semester" name="semester" required min="1" max="14">
+        </div>
+        <div class="mb-3">
+            <label for="angkatan" class="form-label">Angkatan</label>
+            <input type="number" class="form-control" id="angkatan" name="angkatan" required min="2000" max="2099">
+        </div>
+        <div class="mb-3">
+            <label for="ipk" class="form-label">IPK</label>
+            <input type="number" step="0.01" class="form-control" id="ipk" name="ipk" required min="0" max="4">
+        </div>
+        <div class="mb-3">
+            <label for="nilai" class="form-label">Nilai</label>
+            <input type="number" class="form-control" id="nilai" name="nilai" required min="0" max="100">
+        </div>
+        <div class="mb-3">
+            <label for="matkul" class="form-label">Mata Kuliah</label>
+            <input type="text" class="form-control" id="matkul" name="matkul" required>
+        </div>
+        <div class="mb-3">
+            <label for="kehadiran" class="form-label">Kehadiran (%)</label>
+            <input type="number" class="form-control" id="kehadiran" name="kehadiran" required min="0" max="100">
+        </div>
+        <div class="mb-3">
+            <label for="prestasi" class="form-label">Prestasi</label>
+            <input type="number" class="form-control" id="prestasi" name="prestasi" required min="0">
+        </div>
+        <div class="mb-3">
+            <label for="organisasi" class="form-label">Organisasi</label>
+            <input type="number" class="form-control" id="organisasi" name="organisasi" required min="0">
+        </div>
+        <button type="submit" class="btn btn-success">Tambah Mahasiswa</button>
+    </form>
+</div>
+{% endblock %}

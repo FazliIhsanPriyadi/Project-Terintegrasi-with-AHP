@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Edit nilai{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Edit nilai</h2>
+    <form method="POST" action="{{ url_for('ubah_nilai', id=nilai.id) }}">
+        <div class="mb-3">
+            <label for="id" class="form-label">id</label>
+            <input type="text" id="id" name="id" class="form-control" value="{{ nilai.id }}" required readonly>
+        </div>
+        <div class="mb-3">
+            <label for="nim" class="form-label">nim</label>
+            <input type="text" id="nim" name="nim" class="form-control" value="{{ nilai.nim }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="mata_kuliah" class="form-label">mata_kuliah</label>
+            <input type="text" id="mata_kuliah" name="mata_kuliah" class="form-control" value="{{ nilai.mata_kuliah }}" required min="0">
+        </div>
+        <div class="mb-3">
+            <label for="semester" class="form-label">semester</label>
+            <input type="number" id="semester" name="semester" class="form-control" value="{{ nilai.semester }}" required min="0">
+        </div>
+        <div class="mb-3">
+            <label for="nilai" class="form-label">nilai</label>
+            <input type="text" id="nilai" name="nilai" class="form-control" value="{{ nilai.nilai }}" required min="0">
+        </div>
+        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+    </form>
+</div>
+{% endblock %}

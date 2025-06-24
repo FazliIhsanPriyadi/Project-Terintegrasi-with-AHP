@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Daftar Mahasiswa{% endblock %}
+
+{% block header %}
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Daftar Mahasiswa</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="container mt-3">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <div class="mb-3">
+        <a href="{{ url_for('tambah_mahasiswa') }}" class="btn btn-success">Tambah Mahasiswa</a>
+        <a href="{{ url_for('hitung_ahp') }}" class="btn btn-primary ml-2">Hitung AHP</a>
+    </div>
+
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>NPM</th>
+                <th>Nama</th>
+                <th>Semester</th>
+                <th>Angkatan</th>
+                <th>IPK</th>
+                <th>Nilai</th>
+                <th>Matkul</th>
+                <th>Kehadiran</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in mahasiswa %}
+            <tr>
+                <td>{{ item.npm }}</td>
+                <td>{{ item.nama }}</td>
+                <td>{{ item.semester }}</td>
+                <td>{{ item.angkatan }}</td>
+                <td>{{ "%.2f"|format(item.ipk) }}</td>
+                <td>{{ item.nilai }}</td>
+                <td>{{ item.matkul }}</td>
+                <td>{{ item.kehadiran }}%</td>
+                <td>
+                    <a href="{{ url_for('ubah_mahasiswa', npm=item.npm) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{{ url_for('hapus_mahasiswa', npm=item.npm) }}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus mahasiswa ini?')">Hapus</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
